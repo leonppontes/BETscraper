@@ -43,13 +43,14 @@ while True:
                 homeShots = homeShotsL1 + homeShotsL2
                 awayShots = awayShotsL1 + awayShotsL2
                 minute = soupAux.find('div', {'class' : 'rectangle-label-component _ymtkw3'})
-                minStr = minute.text
-                minStr = minStr[:2]
-                if minStr[0].isdigit() and minStr[1].isdigit():
-                    minNum = int(minStr)
-                    if minNum < 45 :
-                        if homeShots > 4 or awayShots > 4 :
-                            print("APOSTAR NO JOGO \ntempo:", minNum,"\nChutes time da casa:", homeShots,"\nChutes time visitante", awayShots, "\nLink:", gameLink)
+                if minute:
+                    minStr = minute.text
+                    minStr = minStr[:2]
+                    if minStr[0].isdigit() and minStr[1].isdigit():
+                        minNum = int(minStr)
+                        if minNum < 45 :
+                            if homeShots > 4 or awayShots > 4 :
+                                print("APOSTAR NO JOGO \ntempo:", minNum,"\nChutes time da casa:", homeShots,"\nChutes time visitante", awayShots, "\nLink:", gameLink, "\n")
         aux = aux + 1
     driver.close()
     time.sleep(60)
