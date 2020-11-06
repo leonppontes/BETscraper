@@ -35,16 +35,21 @@ while True:
             stat = []
             for stats in soupAux.find_all('div', {'class' : '_l4qo4t text-component'}):
                 stat.append(stats)
-                homeShots = int(stat[0].text)
-                awayShots = int(stat[1].text)
+            if stat :
+                homeShotsL1 = int(stat[0].text)
+                awayShotsL1 = int(stat[1].text)
+                homeShotsL2 = int(stat[2].text)
+                awayShotsL2 = int(stat[3].text)
+                homeShots = homeShotsL1 + homeShotsL2
+                awayShots = awayShotsL1 + awayShotsL2
                 minute = soupAux.find('div', {'class' : 'rectangle-label-component _ymtkw3'})
                 minStr = minute.text
                 minStr = minStr[:2]
-                if minStr[0].isdigit() :
+                if minStr[0].isdigit() and minStr[1].isdigit():
                     minNum = int(minStr)
                     if minNum < 45 :
                         if homeShots > 4 or awayShots > 4 :
-                            print("APOSTAR NO JOGO \ntempo:", minNum,"\nChutes time da casa:", homeShots,"\nChutes time visitante", awayShots)
+                            print("APOSTAR NO JOGO \ntempo:", minNum,"\nChutes time da casa:", homeShots,"\nChutes time visitante", awayShots, "\nLink:", gameLink)
         aux = aux + 1
     driver.close()
     time.sleep(60)
